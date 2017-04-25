@@ -75,30 +75,47 @@ send之后就开始等待，官方提示是过了过渡期就你就可以提交�
 
 
 ## 7.错误提示
-如果出现
+(1)错误
 
 	source: The version should be included in the Git tag.
-
-应该是因为下面这两行 的 版本数字不一致导致的
-
+	应该是因为下面这两行 的 版本数字不一致导致的
 	s.version          = "0.1.0"
 	s.source           = { :git => "http://gitlab...git", :tag => '0.1.1' }  
-
-s.version 与 tag=>'0.1.1' 不一致。
-可以直接   
-
+	s.version 与 tag=>'0.1.1' 不一致。
+	可以直接   
 	s.source           = { :git => "http://gitlab...git", :tag => s.version }  
+(2)错误
 
+	getaddrinfo: nodename nor servname provided, or not known
+	可以将DNS改为8.8.8.8后再试试.
+(3)错误
+
+	Authentication token is invalid or unverified. Either verify it with the email that was sent or register a new session.
+	1.先 pod trunk register 你的邮箱
+	2.打开邮箱进行验证
+	3.重新执行 pod trunk push (podspec)
+	
 ## 8.完成后 pod search
-完成后 pod search xxx 一直搜索不到自己的项目。（找了网上好多都是交重装cocoapods的，坑了我半小时）
-最后清除下 缓存就OK了
+完成后 pod search xxx 一直搜索不到自己的项目。
+解决办法：
+先清除下 缓存就OK了
 
 	rm ~/Library/Caches/CocoaPods/search_index.json
 	
-后在一次输入：pod search xxxx 就找到自己的啦，
-怎么使用coocapod 网上很多久不赘述了。
+后在一次输入：
+	
+	pod search xxxx
+就可以找到了。
+
+如果还是不行的话，可以直接 
+
+	pod setup 
+重装一下，
+
+再重复上面的步骤。
 
 
+具体怎么使用coocapod 网上很多久不赘述了。
 ## end
 
 参考链接：
